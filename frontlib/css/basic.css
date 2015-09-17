@@ -1,0 +1,140 @@
+@charset "utf-8";
+
+/**
+  * 第一部分：Css Reset，来自Css鼻祖Eric Meyer
+  * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
+  * http://cssreset.com
+  */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,  b, u, i, center,  dl, dt, dd, ol, ul, li,  fieldset, form, label, legend,  table, caption, tbody, tfoot, thead, tr, th, td,  article, aside, canvas, details, embed,  figure, figcaption, footer, header, hgroup,  menu, nav, output, ruby, section, summary,  time, mark, audio, video
+{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/**
+  * HTML5 display-role reset for older browsers
+  */
+article, aside, details, figcaption, figure,  footer, header, hgroup, menu, nav, section
+{
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,  q:before, q:after
+{
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/**
+  * 第二部分：基本的缺省样式
+  * LLFY CSS : Body / a / fieldset / img / button / input / select / textarea / sup / sub
+  */
+body{
+    width: 100%;
+    font-size:14px;
+    font-weight:normal;
+    font-family:"微软雅黑","宋体", "Hiragino Sans GB W3", serif;
+    color:#000;
+    line-height:1.5em;
+    background-color: #e9e9e9;
+}
+
+/**
+  * 屏幕感知
+  * LLFY CSS : @Screen size auto css
+  * width:
+  *	1080: Android旗舰机型
+  *	720：Android中高阶
+  *	640：iPhone5、iPhone4
+  *	540：Android低阶机
+  *	480：Android基本型
+  *	320：iPhone3等
+  */
+@media screen and (min-width:1080px){
+    body{
+        font-size:28px;
+    }
+}
+
+@media screen and (min-width:720px) and (max-width:1079px){
+    body{
+        font-size:22px;
+    }
+}
+@media screen and (min-width:640px) and (max-width:719px){
+    body{
+        font-size:18px;
+    }
+}
+@media screen and (max-width:639px){
+    body{
+        font-size:14px;
+    }
+}
+
+/**
+  * 链接样式
+  */
+a:link, a:hover, a:visited, a:active {
+}
+
+fieldset, img { border: 0;}
+
+/**
+  * 输入的缺省样式
+  */
+button,input,select {
+    border: 1px solid #000000;
+    padding: 10px;
+    /*margin: 0 0 10px 0;*/
+    margin: 0;
+    font: inherit;
+    font-size: 1em;
+    font-weight: normal;
+}
+
+/**
+  * textarea文本输入的缺省样式
+  */
+textarea {
+    width: 100%;
+    resize: none;
+    border: medium none;
+    padding: 10px 2px;
+    height: 100%;
+    font-size: 0.9em;
+}
+
+sup {
+    vertical-align: text-top
+}
+
+sub {
+    vertical-align: text-bottom
+}
+
+h1 { font-size: 2em; font-weight: bold}
+h2 { font-size: 1.5em; font-weight: bold}
+h3 { font-size: 1.2em; font-weight: bold;}
+h4 { font-size: 1em; font-weight: bold;}
+
+.h1 { font-size: 2em; font-weight: bold}
+.h2 { font-size: 1.5em; font-weight: bold}
+.h3 { font-size: 1.2em; font-weight: bold;}
+.h4 { font-size: 1em; font-weight: bold;}

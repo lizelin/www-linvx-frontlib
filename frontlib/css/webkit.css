@@ -1,0 +1,54 @@
+@charset "utf-8";
+
+/**************webkit的滚动条****************/
+.-webkit-scroll::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+    border-radius: 2px;
+}
+
+.-webkit-scroll::-webkit-scrollbar
+{
+    width: 4px;
+    background-color: #F5F5F5;
+}
+
+.-webkit-scroll::-webkit-scrollbar-thumb
+{
+    background-color: gray;
+    border: 2px solid #555555;
+}
+
+.-webkit-scroll{
+    -webkit-overflow-scrolling:  touch;
+}
+
+/**
+  * 文本超长时设置...
+  * 注意：如果只有一行，设置white-space: nowrap;
+  * 如果多行，需要-webkit-line-clamp: 2;设置行数
+  */
+.-webkit-ellipsis-1-row {
+    white-space: nowrap;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.-webkit-ellipsis-2-rows {
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.-webkit-ellipsis-3-rows {
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}

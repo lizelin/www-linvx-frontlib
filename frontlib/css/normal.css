@@ -1,0 +1,126 @@
+@charset "utf-8";
+
+/**
+  * 元素居中
+  * 注意父元素必须是relative的或者absolute，
+  * 父元素和子元素必须设置宽和高
+  * 示例：
+      <div style="position: relative; width: 20em; height: 20em; border: 1px solid green; ">
+        <div class="abs-center is-fixed" style="width: 10em; height: 10em; border: 2px solid blue; ">
+            屏幕居中
+        </div>
+        <div class="abs-center" style="width: 10em; height: 10em; border: 2px solid red; ">
+            容器居中
+        </div>
+        <p class="abs-center text-center" style="border: 2px solid yellow;">
+            文字居中
+        </p>
+    </div>
+  */
+.abs-center {
+    position: absolute;
+    margin: auto;
+    left: 0; top: 0; right: 0; bottom: 0;
+}
+
+.abs-center.is-fixed {
+    position: fixed;
+    z-index: 9999;
+}
+
+.abs-center.text-center {
+    text-align: center;
+    height: 1.5em;
+    line-height: 1.5em;
+}
+
+/**
+  * 图片（垂直加水平）居中
+  * 用法：
+  * <div class="img-align-middle" style="line-height=4em; height=4em"><p><img/></p></div>
+  */
+.img-align-middle {
+    overflow:hidden;
+    position:relative;
+    text-align:center;
+}
+.img-align-middle p {
+    position:static;
++position:absolute;
+    top:50%;
+    vertical-align:middle
+}
+.img-align-middle p img {
+    position:static;
++position:relative;
+    top:-50%;left:-50%;
+    vertical-align:middle;
+    width: 80%;
+}
+
+/**
+  * clear相关
+  */
+.cb {clear: both}
+.cl {clear: left}
+.cr {clear: right}
+
+/**
+  * clearfix
+  */
+.clear-fix:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
+
+/**
+  * float相关
+  */
+.fl {float: left}
+.fr {float: right}
+
+/**
+  * 对齐方式
+  */
+.center {text-align: center;}
+.left {text-align: left;}
+.right {text-align: right; }
+.top {vertical-align: top;}
+.right {vertical-align: bottom; }
+.middle {vertical-align: middle;}
+
+/**
+  * margins
+  */
+.m-1 {margin: 1px;}
+.m-2 {margin: 2px;}
+.m-5 {margin: 5px;}
+.m-10 {margin: 10px;}
+.m-15 {margin: 15px;}
+.m-20 {margin: 20px;}
+
+.mt-1 {margin-top: 1px;}
+.mt-2 {margin-top: 2px;}
+.mt-5 {margin-top: 5px;}
+.mt-10 {margin-top: 10px;}
+.mt-15 {margin-top: 15px;}
+.mt-20 {margin-top: 20px;}
+
+.mr-1 {margin-right: 1px;}
+.mr-2 {margin-right: 2px;}
+.mr-5 {margin-right: 5px;}
+.mr-10 {margin-right: 10px;}
+.mr-15 {margin-right: 15px;}
+.mr-20 {margin-right: 20px;}
+
+.mb-1 {margin-bottom: 1px;}
+.mb-2 {margin-bottom: 2px;}
+.mb-5 {margin-bottom: 5px;}
+.mb-10 {margin-bottom: 10px;}
+.mb-15 {margin-bottom: 15px;}
+.mb-20 {margin-bottom: 20px;}
+
+.ml-1 {margin-left: 1px;}
+.ml-2 {margin-left: 2px;}
+.ml-5 {margin-left: 5px;}
+.ml-10 {margin-left: 10px;}
+.ml-15 {margin-left: 15px;}
+.ml-20 {margin-left: 20px;}
+

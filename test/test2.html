@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../frontlib/commonLib/sizzle-2.2.1.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            var defer = $.Deferred();
+
+            var defer1 = defer.then(function(value) {
+                return value * 2;
+            });
+            var defer2 = defer1.then(function(value) {
+                return value * 2;
+            });
+            var defer3 = defer2.done(function(value) {
+                alert(value)  //20
+            });
+            defer.resolve(5);
+        }
+    </script>
+    <title></title>
+</head>
+<body>
+<div id="text">
+    <p>
+        <input type="text" />
+    </p>
+    <div class="aaron">
+        <input type="checkbox" name="readme" />
+        <p><span class="red">Sizzle</span></p>
+    </div>
+</div>
+</body>
+</html>
