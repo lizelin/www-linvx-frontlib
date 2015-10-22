@@ -173,8 +173,9 @@
             },
             setCookie: function(cookieName, cookieValue, seconds, path, domain, secure) {
                 var expires = new Date();
-                expires.setTime(expires.getTime() + seconds);
-                document.cookie = escape(cookieName) + '=' + escape(cookieValue) + (expires ? '; expires=' + expires.toGMTString() : '') + (path ? '; path=' + path : '/') + (domain ? '; domain=' + domain : '') + (secure ? '; secure' : '');
+                if (seconds)
+                    expires.setTime(expires.getTime() + seconds);
+                document.cookie = escape(cookieName) + '=' + escape(cookieValue) + (seconds ? '; expires=' + expires.toGMTString() : '') + (path ? '; path=' + path : '/') + (domain ? '; domain=' + domain : '') + (secure ? '; secure' : '');
             }
         },
         htmlEncode : function(text) {
