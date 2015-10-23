@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>basic for Bootstrap test</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./bootstrap-3.3.5-dist/css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="./bootstrap-3.3.5-dist/css/bootstrap-theme.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="./PortnineThemesDemo/stylesheets/theme.css" rel="stylesheet">
+    <script type="text/javascript" src="../../frontlib/commonLib/jquery/jquery-2.1.4.js"></script>
+    <script type="text/javascript" src="bootstrap-3.3.5-dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="hicharts-4.1.9/highcharts.js"></script>
+</head>
+<body class="theme-blue">
+    <div class="navbar navbar-default" role="navigation">
+        <h1>
+            <span>class navbar navbar-default</span>
+            <div class="dropdown dropdown-header pull-right">
+                <button class="btn btn-default btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropup
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+        </h1>
+    </div>
+    <div class="sidebar-nav">
+        <h2>class siderbar-nav</h2>
+
+    </div>
+    <div class="content">
+        <div class="header">
+            <h2>class header</h2>
+        </div>
+        <div class="test2">
+            <div class="row" style="margin-top:20px">
+                <div class="col-md-12" style="padding-left:30px;min-width:400px;min-height:400px" id="user_new_count_line">
+                </div>
+            </div>
+
+            <!-- 昨日以及累计数据 -->
+            <div class="row">
+                <div class="col-sm-6 col-md-6" style="min-width:450px">
+                    <div class="panel panel-default">
+                        <a href="#user_new_count_pie" class="panel-heading" data-toggle="collapse">昨日新增会员 :  <span id="user_new_count"></span></a>
+                        <div id="user_new_count_pie" class="panel-body collapse in" style="min-width:400px;height:400px">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-6" style="min-width:450px">
+                    <div class="panel panel-default">
+                        <a href="#user_total_count_pie" class="panel-heading" data-toggle="collapse">会员积累总数: <span id="user_total_count"></span> </a>
+
+                        <div id="user_total_count_pie" class="panel-body collapse in" style="min-width:400px;height:400px">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <script>
+            var fillLineChartData = function(_title, x, chart_data, $container){
+                $container.highcharts({
+                    title: {
+                        text: '',
+                        x: -20 //center
+                    },
+                    xAxis: {
+                        categories: x? x: []
+                    },
+                    yAxis: {
+                        title: {
+                            text: _title
+                        },
+                        plotLines: [{
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        }]
+                    },
+                    tooltip: {
+                        valueSuffix: ''
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
+                        borderWidth: 0
+                    },
+                    series: chart_data?chart_data:[]
+                });
+
+            };
+            var fillPieChartData = function(_title, chart_data, $container) {
+                $container.highcharts({
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false
+                    },
+                    title: {
+                        text: ''
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.y}</b>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                style: {
+                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                }
+                            }
+                        }
+                    },
+                    series: [{
+                        type: 'pie',
+                        name: _title,
+                        data: chart_data ? chart_data : []
+                    }]
+                });
+            };
+
+            var result = {"ret":200,"user_total_count":[["成都市(1)",1712],["龙岩市(1)",459],["广州市(8)",9163],["佛山市(1)",1012],["深圳市(1)",621],["杭州市(1)",620],["上海市(1)",560]],"user_new_count":[["成都市(1)",24],["龙岩市(1)",3],["广州市(8)",106],["佛山市(1)",4],["深圳市(1)",18],["杭州市(1)",0],["上海市(1)",23]],"series":[{"data":[246,186,183,184,209,318,313,152,171,188,178],"name":"合计"},{"data":[10,3,8,20,15,12,28,11,5,9,24],"name":"成都市(1)"},{"data":[4,8,4,3,4,24,20,18,13,10,4],"name":"佛山市(1)"},{"data":[155,113,136,135,156,247,219,95,111,156,106],"name":"广州市(8)"},{"data":[0,0,0,0,0,0,0,0,0,0,0],"name":"杭州市(1)"},{"data":[1,0,1,13,2,2,0,2,1,0,3],"name":"龙岩市(1)"},{"data":[26,20,27,13,31,21,30,13,18,7,23],"name":"上海市(1)"},{"data":[50,42,7,0,1,12,16,13,23,6,18],"name":"深圳市(1)"}],"x":["2015-10-12","2015-10-13","2015-10-14","2015-10-15","2015-10-16","2015-10-17","2015-10-18","2015-10-19","2015-10-20","2015-10-21","2015-10-22"]};
+
+            fillLineChartData('test title', result.x, result.series, $("#user_new_count_line"));
+            fillPieChartData('test title', result.user_total_count, $("#user_total_count_pie"));
+            fillPieChartData('test title', result.user_new_count, $("#user_new_count_pie"));
+
+        </script>
+        <div class="test1">
+                <button type="button" class="btn btn-default" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                </button>
+
+                <button type="button" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Star
+                </button>
+
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile">File input</label>
+                        <input type="file" id="exampleInputFile">
+                        <p class="help-block">Example block-level help text here.</p>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> Check me out
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+
+                <h1>h1. Bootstrap heading</h1>
+                <h2>h2. Bootstrap heading</h2>
+                <h3>h3. Bootstrap heading</h3>
+                <h4>h4. Bootstrap heading</h4>
+                <h5>h5. Bootstrap heading</h5>
+                <h6>h6. Bootstrap heading</h6>
+
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Username</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-xs-12 col-md-8">.col-xs-12 .col-md-8</div>
+                    <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+                </div>
+
+                <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+                <div class="row">
+                    <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+                    <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+                    <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+                </div>
+
+                <!-- Columns are always 50% wide, on mobile and desktop -->
+                <div class="row">
+                    <div class="col-xs-6">.col-xs-6</div>
+                    <div class="col-xs-6">.col-xs-6</div>
+                </div>
+        </div>
+    </div>
+
+</body>
+</html>

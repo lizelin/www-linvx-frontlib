@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="cn">
+    <meta charset="UTF-8">
+    <title>jquery promise test</title>
+    <script type="text/javascript" src="../../frontlib/commonLib/jquery/jquery-2.1.4.js"></script>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    $(function() {
+//        $.get("../../demo/iconfont/demo.html").done(
+//        $.get("http://www.baidu.com/").done(
+        $.when($.get("http://www.baidu.com/")).done(
+                function(data,status,jqXhr){
+                    console.log("success:");
+                    console.log("data:");
+                    console.log(data);
+                    console.log("status:");
+                    console.log(status);
+                    console.log("jqXhr:");
+                    console.log(jqXhr);
+                }
+        ).fail(
+                function(jqXhr,status,errText){
+                    console.log("fail:");
+                    console.log("jqXhr:");
+                    console.log(jqXhr);
+                    console.log("status:");
+                    console.log(status);
+                    console.log("errText:");
+                    console.log(errText);
+                }
+        );
+    });
+</script>
+</html>
