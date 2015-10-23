@@ -174,7 +174,7 @@
             setCookie: function(cookieName, cookieValue, seconds, path, domain, secure) {
                 var expires = new Date();
                 if (seconds)
-                    expires.setTime(expires.getTime() + seconds);
+                    expires.setTime(expires.getTime() + seconds * 1000);
                 document.cookie = escape(cookieName) + '=' + escape(cookieValue) + (seconds ? '; expires=' + expires.toGMTString() : '') + (path ? '; path=' + path : '/') + (domain ? '; domain=' + domain : '') + (secure ? '; secure' : '');
             }
         },
