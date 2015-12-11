@@ -285,6 +285,14 @@
                 ele.style[key] = props[key];
             }
         },
+        /**
+         *
+         * @param imgs   ['1.jpg', '2.jpg']
+         * @param onComplete  callback function, params:imagesElements, successCount, errorCount, abortCount
+         * Linvx.ui.preLoadImages(imgs, function(eles, success){
+                $("#msg").html("加载完成，点击进入特卖场");
+            });
+         */
         preLoadImages : function(imgs, onComplete/*imagesElements, successCount, errorCount, abortCount*/) {
             var imageElements = [];
             if (!Linvx.utils.isArray(imgs) || !Linvx.utils.isFunction(onComplete)) {
