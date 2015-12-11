@@ -286,7 +286,7 @@
             }
         },
         /**
-         *
+         * 预加载页面的图片
          * @param imgs   ['1.jpg', '2.jpg']
          * @param onComplete  callback function, params:imagesElements, successCount, errorCount, abortCount
          * Linvx.ui.preLoadImages(imgs, function(eles, success){
