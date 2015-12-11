@@ -61,7 +61,16 @@
             var r = Math.random() * 16 | 0,
                 v = c == "x" ? r : (r & 3 | 8);
             return v.toString(16);
-        })
+        }),
+
+        isArray : function(object){
+            return Linvx.utils.type(object)=='array';
+        },
+
+        isFunction: function(object){
+            return Linvx.utils.type(object)=='function';
+        }
+
     };
 
     /**
@@ -162,8 +171,8 @@
     })();
 
     /**
-      * 二，http相关
-      */
+     * 二，http相关
+     */
     Linvx.http = {
         cookie : {
             getCookie: function(name) {
@@ -275,8 +284,169 @@
             for (var key in props) {
                 ele.style[key] = props[key];
             }
+        },
+        preLoadImages : function(imgs, onComplete/*imagesElements, successCount, errorCount, abortCount*/) {
+            var imageElements = [];
+            if (!Linvx.utils.isArray(imgs) || !Linvx.utils.isFunction(onComplete)) {
+                console.log("wrong args! the first arg must be array and the second arg must function");
+                onComplete(imageElements, 0, 0, 0);
+            }
+            var len = imgs.length;
+            var successCount=0, errorCount=0, abortCount=0;
+            var checkAllDone = function(){
+                if (successCount + errorCount + abortCount == len ) {
+                    onComplete(imageElements, successCount, errorCount, abortCount);
+                }
+            }
+            for (var i=0; i<len; i++) {
+                var img = document.createElement("img");
+                //img.style.display = "none";
+                img.onabort = function(result) {
+                    abortCount++;
+//                    console.log(result);
+                    checkAllDone();
+                }
+                img.onload = function(result) {
+                    successCount++;
+                    imageElements.push(this);
+//                    console.log(result);
+                    checkAllDone();
+                }
+                img.onerror = function(result) {
+                    errorCount++;
+//                    console.log(result);
+                    checkAllDone();
+                }
+                img.src = imgs[i];
+            }
+        },
+
+        isSupportTouch:function(){
+            return "ontouchend" in document ? true : false;
+        },
+
+        /**
+         * 封装触屏事件
+         * @param obj
+         * @param _events
+         *      json object, keys: start, move, left, right, top, down, long, click, end
+         */
+        touchEventWrapper : function(obj, _events){
+            var hasTouch = Linvx.ui.isSupportTouch();
+            var start = hasTouch?"touchstart":"mousedown";
+            var end = hasTouch?"touchend":"mouseup";
+            var move = hasTouch?"touchmove":"mousemove";
+            var _isMouseDown = false;
+
+            var getPos = function(event){
+                var touch = hasTouch?event.targetTouches[0]:event;
+                return {clientX:touch.clientX, clientY:touch.clientY};
+            }
+
+            //滑动范围在5x5内则做点击处理，s是开始，e是结束
+            var init = {x:5,y:5,sx:0,sy:0,ex:0,ey:0,dx:0,dy:0};
+            var sTime = 0, eTime = 0;
+
+            obj.addEventListener(start,function(e){
+                _isMouseDown = true;
+                var event = e || window.event;
+                event.preventDefault();//阻止触摸时浏览器的缩放、滚动条滚动
+                event.stopPropagation();
+//                console.log(event);
+                sTime = new Date().getTime();
+                var pos = getPos(event);
+                init.sx = pos.clientX;
+                init.sy = pos.clientY;
+                init.ex = init.sx;
+                init.ey = init.sy;
+                if(_events.start) _events.start(init, event);
+            }, false);
+
+            obj.addEventListener(move,function(e) {
+                var event = e || window.event;
+                event.preventDefault();//阻止触摸时浏览器的缩放、滚动条滚动
+                event.stopPropagation();
+                if (_isMouseDown) {
+//                    var event = e || window.event;
+//                    event.preventDefault();//阻止触摸时浏览器的缩放、滚动条滚动
+//                    event.stopPropagation();
+//                    console.log(event);
+                    var pos = getPos(event);
+                    init.dx = pos.clientX - init.ex;
+                    init.dy = pos.clientY - init.ey;
+                    init.ex = pos.clientX;
+                    init.ey = pos.clientY;
+                    if(_events.move) _events.move(init, event);
+                }
+            }, false);
+
+            function _onEnd(e) {
+                _isMouseDown = false;
+                var event = e || window.event;
+                event.preventDefault();//阻止触摸时浏览器的缩放、滚动条滚动
+                event.stopPropagation();
+//                console.log(event);
+                var changeX = init.sx - init.ex;
+                var changeY = init.sy - init.ey;
+                if(Math.abs(changeX)>Math.abs(changeY)&&Math.abs(changeY)>init.y) {
+                    //左右事件
+                    if(changeX > 0) {
+                        if(_events.left) _events.left();
+                    }else{
+                        if(_events.right) _events.right();
+                    }
+                }
+                else if(Math.abs(changeY)>Math.abs(changeX)&&Math.abs(changeX)>init.x){
+                    //上下事件
+                    if(changeY > 0) {
+                        if(_events.top) _events.top();
+                    }else{
+                        if(_events.down) _events.down();
+                    }
+                }
+                else if(Math.abs(changeX)<init.x && Math.abs(changeY)<init.y){
+                    eTime = new Date().getTime();
+                    //点击事件，此处根据时间差细分下
+                    if((eTime - sTime) > 300) {
+                        if(_events.long) _events.long(); //长按
+                    }
+                    else {
+                        if(_events.click) _events.click(); //当点击处理
+                    }
+                }
+                if(_events.end) {
+                    _events.end(init, event);
+                }
+            }
+            obj.addEventListener(end,_onEnd, false);
+            if (!hasTouch) {
+                obj.addEventListener("mouseout", _onEnd, false);
+            }
         }
+
     };
+    Linvx.ui.resizeMe = function(displayHeight, displayWidth) {
+        // iphone5 : 1136x640, height-40头尾
+        //Standard dimensions, for which the body font size is correct
+        var preferredHeight = 480;
+        var preferredWidth = 320;
+
+        if (displayHeight < preferredHeight || displayWidth < preferredWidth) {
+            var heightPercentage = (displayHeight * 100) / preferredHeight;
+            var widthPercentage = (displayWidth * 100) / preferredWidth;
+            var percentage = Math.min(heightPercentage, widthPercentage);
+            var newFontSize = percentage.toFixed(2);
+
+            $("body").css('font-size', newFontSize + '%');
+        } else {
+            $("body").css('font-size', '100%');
+        }
+//    console.log("call resizeMe H:" + displayHeight + " and W:" + displayWidth);
+    }
+
+    if (!window.console) {
+        window.console = {log:function(){}};
+    }
 
     return Linvx
 

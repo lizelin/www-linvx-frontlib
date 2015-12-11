@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh_cn">
+    <meta charset="UTF-8">
+    <title>监控系统-帮助信息</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="./css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <script type="text/javascript" src="./js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+
+    <style>
+        .header {
+            background: #fff none repeat scroll 0 0;
+            border-bottom: 1px solid #eee;
+            border-left: 1px solid #ffffff;
+            margin: 0 0 2em;
+            padding: 0.5em 0 1em;
+        }
+    </style>
+
+</head>
+<body  class="theme-blue">
+<div class="container">
+    <div class="header">
+        <h2>监控系统-简要说明</h2>
+    </div>
+    <div class="content">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">昨日遗留</div>
+            <div class="panel-body">昨日遗留问题，在闭店前没有解决，但有可能今日重启终端后已经恢复。<br/>注意：此类信息不会发送恢复信息。</div>
+        </div>
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">最新</div>
+            <div class="panel-body">今日最新的报警信息，发送一次后不会重复发送。</div>
+        </div>
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">最新故障恢复</div>
+            <div class="panel-body">故障恢复的监控信息，发送一次后不会重复发送。</div>
+        </div>
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">超2小时故障</div>
+            <div class="panel-body">当日超过两小时的报警，发送一次后不会重复发送。注意：系统不再单独发送超2小时故障恢复报警信息，统一由最新故障恢复报警信息发送。</div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
