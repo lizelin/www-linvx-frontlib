@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh_CN">
+    <meta charset="UTF-8">
+    <title>test cmd</title>
+    <script type="text/javascript" src="../frontlib/commonLib/jquery/jquery-2.1.4.js"></script>
+    <!--<script type="text/javascript" src="../frontlib/js/utils.js"></script>-->
+    <script type="text/javascript">
+        function sub(){
+            $.ajax({
+                type : "post",
+                dataType : "text/html",
+                data: $("#data").text(),
+                url : $("#url").val(),
+                success : function(data) {
+                    console.log(data.responseText);
+                    $("#result").text(data.responseText);
+                },
+                error:function(data){
+                    console.log("err");
+                    console.log(data);
+                    $("#result").text(data.responseText);
+                }
+            });
+        };
+
+    </script>
+    <style>
+        div textarea, div input {
+            width: 80%;
+            height: 5em;
+        }
+        div {
+            margin-bottom: 1em;
+            border: 1px solid #000000;
+        }
+
+    </style>
+</head>
+<body>
+<div>
+    <label for="url">服务器url</label>
+    <input type="text" value="http://localhost:8080/online-customer-service/test/testcmd.jsp" id="url">
+</div>
+<div>
+    <label for="data">数据</label>
+    <textarea id="data" name="data">{accountId:'lizelin',cmd:''}</textarea>
+</div>
+<div>
+    <label for="result">返回</label>
+    <div  id="result" name="result"></div>
+</div>
+
+<input type="button" value="发送数据" onclick="sub()">
+
+</body>
+</html>
