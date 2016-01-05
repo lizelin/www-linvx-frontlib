@@ -1,15 +1,19 @@
 /**
  * Created by lizelin on 2015/8/3.
- * 一，常用的函数
+ * 一，Version 1.0.0
  *      Linvx.utils.merge(obj, obj1....)：合并对象
  *      Linvx.utils.createUUID: 创建唯一标志
  *      Linvx.utils.os.*: 判断浏览器类型
- *          iso, android, iphone, ipad, ipod, wx, version, wxversion
+ *          ios, android, iphone, ipad, ipod, wx, version, wxversion
  *      Linvx.utils.type(obj): 判断变量类型
  *          boolean number string function array date regexp object error
  *      Linvx.utils.dumpObject(obj): 调测使用
  *      Linvx.http.*: http相关，包括cookie、htmlEncode, htmlDecode, addParam, getParam, goUrl等
- *      Linvx.ui.*: ui相关，包括css等
+ *      Linvx.ui.*: ui相关，包括css, 预加载图片，设置touch事件，缩放字体等
+ *
+ * 二，Version 1.0.1
+ *      修改了字体缩放函数：Linvx.ui.resizeMe，将以前使用jQuery选择器的部分剔除；
+ *
  */
 
 (function (root, factory) {
@@ -25,7 +29,7 @@
 }(this, function () {
     "use strict"
     var Linvx = {
-        version: "1.0.0",
+        version: "1.0.1",
         author: "Li Ze Lin"
     }
 
@@ -433,11 +437,11 @@
         }
 
     };
-    Linvx.ui.resizeMe = function(displayHeight, displayWidth) {
+    Linvx.ui.resizeMe = function(displayHeight, displayWidth, preferredHeight, preferredWidth ) {
         // iphone5 : 1136x640, height-40头尾
         //Standard dimensions, for which the body font size is correct
-        var preferredHeight = 480;
-        var preferredWidth = 320;
+        preferredHeight = preferredHeight || 480;
+        preferredWidth = preferredWidth || 320;
 
         if (displayHeight < preferredHeight || displayWidth < preferredWidth) {
             var heightPercentage = (displayHeight * 100) / preferredHeight;
@@ -445,9 +449,9 @@
             var percentage = Math.min(heightPercentage, widthPercentage);
             var newFontSize = percentage.toFixed(2);
 
-            $("body").css('font-size', newFontSize + '%');
+            document.getElementsByTagName("body").item(0).style.fontSize =  newFontSize + '%';
         } else {
-            $("body").css('font-size', '100%');
+            document.getElementsByTagName("body").item(0).style.fontSize =  '100%';
         }
 //    console.log("call resizeMe H:" + displayHeight + " and W:" + displayWidth);
     }

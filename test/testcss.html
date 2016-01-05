@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div style="font-size: 2em; color: red">测试文字</div>
+<button onclick="increaseFontSize();">increaseFontSize</button>
+<button onclick="decreaseFontSize();">decreaseFontSize</button>
+
+<script>
+    var fs = 100;
+    function decreaseFontSize(v) {
+        fs -= 10;
+        document.getElementsByTagName("body").item(0).style.fontSize = fs + "%";
+    }
+    function increaseFontSize(v) {
+
+        fs += 10;
+        document.getElementsByTagName("body").item(0).style.fontSize = fs + "%";
+    }
+
+</script>
+</body>
+</html>
